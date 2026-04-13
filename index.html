@@ -8,38 +8,45 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --sky: #38bdf8;
+            --deep: #0c4a6e;
+            --accent: #f59e0b;
+            --dark: #0f172a;
+            --card-radius: 20px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+            font-family: 'DM Sans', sans-serif;
         }
 
-        /* Navbar */
+        /* ── NAVBAR ── */
         .navbar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 60px;
-            background: white;
+            height: 64px;
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-left:20px;
-            padding-right:30px;
-            padding-top:10px;
-            padding-bottom:30px;
+            padding: 0 30px;
             z-index: 1000;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
         }
 
         .navbar .logo {
-            font-size: 22px;
-            font-weight: bold;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
             color: black;
         }
 
@@ -49,55 +56,84 @@
         }
 
         .nav-links li {
-            margin-left: 80px;
+            margin-left: 50px;
         }
 
         .nav-links a {
-            color: black;
+            color: #334155;
             text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:hover i {
+            color: var(--sky);
+        }
+
+        .nav-links a i {
+            color: #94a3b8;
             font-size: 16px;
+            transition: color 0.2s;
         }
 
-        .nav-links a:hover {
-            color: #38bdf8;
-        }
-
-        /* Sidebar */
+        /* ── SIDEBAR ── */
         .sidebar {
             position: fixed;
-            top: 60px;
+            top: 64px;
             left: 0;
             width: 220px;
-            height: 100%;
+            height: calc(100% - 64px);
             background: white;
             padding-top: 20px;
-            border-right: 1px solid #ddd;
+            border-right: 1px solid #e2e8f0;
+            z-index: 999;
         }
 
         .sidebar a {
-            display: block;
-            color: black;
-            padding: 20px 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #475569;
+            padding: 14px 24px;
             text-decoration: none;
+            font-size: 15px;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar a i {
+            font-size: 18px;
+            color: #94a3b8;
+            transition: color 0.2s;
         }
 
         .sidebar a:hover {
-            background: lightblue;
+            background: #f0f9ff;
+            color: var(--deep);
+            border-left-color: var(--sky);
         }
 
-        /* Content */
+        .sidebar a:hover i {
+            color: var(--sky);
+        }
+
+        /* ── CONTENT ── */
         .content {
-            margin-top: 60px;
-            margin-left: 200px;
-            padding: 20px;
+            margin-top: 64px;
+            margin-left: 220px;
         }
 
-        /* Carousel */
+        /* ── CAROUSEL ── */
         .carousel,
         .carousel-item,
         .carousel-item img {
-            height: 60vh;
-            width:105%;
+            height: 65vh;
+            width: 100%;
         }
 
         .carousel-item img {
@@ -105,186 +141,606 @@
         }
 
         .carousel-caption {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 20px;
+            background: rgba(0, 0, 0, 0.45);
+            padding: 24px 32px;
+            border-radius: 16px;
+            backdrop-filter: blur(4px);
+        }
+
+        .carousel-caption h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+        }
+
+        /* ── SEARCH BAR ── */
+        .hero-search {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            width: 600px;
+            max-width: 90%;
+        }
+
+        .hero-search .search-wrap {
+            display: flex;
+            background: white;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .hero-search input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 14px 24px;
+            font-size: 15px;
+            background: transparent;
+        }
+
+        .hero-search button {
+            background: var(--sky);
+            border: none;
+            color: white;
+            padding: 14px 28px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .hero-search button:hover {
+            background: var(--deep);
+        }
+
+        /* ── DEALS SECTION ── */
+        .deals-section {
+            background: #f8fafc;
+            padding: 60px 40px 60px 260px;
+        }
+
+        .deals-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 44px;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .deals-subtitle {
+            color: #64748b;
+            font-size: 16px;
+            margin-top: 8px;
+        }
+
+        .filter-btn {
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--deep) !important;
+            color: white !important;
+            border-color: var(--deep) !important;
+        }
+
+        /* ── CARDS ── */
+        .card {
+            border: none;
+            border-radius: var(--card-radius);
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            background: white;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 48px rgba(0,0,0,0.15);
+        }
+
+        .card img {
+            height: 220px;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .discount {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--sky);
+            color: white;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: white;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+            cursor: pointer;
+            font-size: 18px;
+            transition: transform 0.2s;
+            user-select: none;
+        }
+
+        .heart:hover {
+            transform: scale(1.2);
+        }
+
+        .heart.liked {
+            color: #ef4444;
+        }
+
+        .card-body i {
+            color: var(--sky);
+            font-size: 15px;
+        }
+
+        .price-tag {
+            background: #f0f9ff;
+            border-radius: 8px;
+            padding: 8px 12px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .price-tag .from {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .price-tag .amount {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--deep);
+        }
+
+        /* ── ABOUT US ── */
+        .about2 {
+            background: white;
+            padding: 80px 40px 80px 260px;
+        }
+
+        .about2 h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+        }
+
+        .imge {
+            width: 100%;
+            max-width: 440px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+
+        /* ── STATS ── */
+        .stats-section {
+            background: var(--deep);
+            padding: 60px 40px 60px 260px;
+            color: white;
+        }
+
+        .stat-box {
+            text-align: center;
+        }
+
+        .stat-box .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--sky);
+        }
+
+        .stat-box p {
+            font-size: 15px;
+            color: #bae6fd;
+            margin-top: 4px;
+        }
+
+        /* ── TESTIMONIALS ── */
+        .testimonials {
+            background: #f8fafc;
+            padding: 70px 40px 70px 260px;
+        }
+
+        .testimonials h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            color: var(--dark);
+        }
+
+        .testi-card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            height: 100%;
+        }
+
+        .testi-card .stars {
+            color: var(--accent);
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .testi-card p {
+            font-size: 15px;
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        .testi-card .author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .testi-card .author img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .testi-card .author-name {
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--dark);
+        }
+
+        .testi-card .author-loc {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        /* ── NEWSLETTER ── */
+        .newsletter {
+            background: linear-gradient(135deg, var(--deep) 0%, #0369a1 100%);
+            padding: 70px 40px 70px 260px;
+            color: white;
+        }
+
+        .newsletter h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0;
+            max-width: 480px;
+            margin-top: 24px;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 14px 22px;
+            font-size: 15px;
+        }
+
+        .newsletter-form button {
+            background: var(--accent);
+            border: none;
+            color: white;
+            padding: 14px 28px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .newsletter-form button:hover {
+            background: #d97706;
+        }
+
+        /* ── CONTACT SECTION ── */
+        .contact-section {
+            background: #f8fafc;
+            padding: 70px 40px 70px 260px;
+        }
+
+        .contact-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            color: var(--dark);
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+        }
+
+        .contact-card .form-control,
+        .contact-card .form-select {
             border-radius: 10px;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+            font-size: 15px;
         }
 
-        /* About section */
-        .about {
-            height: 300vh;
-            background: #f8f9fa;
-            padding: 30px;
-            padding-left:240px;
+        .contact-card .form-control:focus,
+        .contact-card .form-select:focus {
+            border-color: var(--sky);
+            box-shadow: 0 0 0 3px rgba(56,189,248,0.15);
         }
-        .deals-title{
-    font-size: 48px;
-    font-weight: 600;
-}
 
-.filter-btn{
-    border-radius: 30px;
-    padding: 8px 18px;
-}
+        .contact-card .btn-submit {
+            background: var(--deep);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 13px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
 
-.card{
-    border: none;
-    border-radius: 20px;
-    overflow: hidden;
-    transition:0.2s ease;
-}
-.card:hover{
-    transform:translateY(-10px);
-    box-shadow:0 15px 35px black;
-}
+        .contact-card .btn-submit:hover {
+            background: var(--sky);
+        }
 
-.card img{
-    height: 220px;
-    object-fit: cover;
-}
-.discount{
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    background: #2c7be5;
-    color: white;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 14px;
-}
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
 
-.heart{
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    background: white;
-    padding: 6px 10px;
-    border-radius: 50%;
-}
-i {
-  color: grey;
-  font-size: 24px;
-  transition:0.2s ease;
-}
-.navhover{
-    transition:0.2s ease;
-}
-.navhover:hover{
-    color: #38bdf8;
-}
-.navhover:hover i{
-    color: #38bdf8;
-}
-.about1{
-            height: 250vh;
-            background: #f8f9fa;
-            padding: 30px;
-            padding-left:240px;
-            
-}
-.one{
-    color:blue;
-    font-family:"Poppins";
-}
-.two{
-    color:red;
-    text-decoration: underline;
-    font-family:"Poppins";
-}
-.search{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    margin-top: 15px;
-}
+        .contact-info-item .icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: #f0f9ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
 
-.srch{
-    width: 200px;
-    height: 40px;
-    border: 1px solid #201565;
-    padding: 10px;
-    border-radius: 5px 0 0 5px;
-    background: white;
-}
+        .contact-info-item .icon-box i {
+            font-size: 22px;
+            color: var(--sky);
+        }
 
-.search-btn{
-    height: 40px;
-    padding: 0 16px;
-    background: #054c14;
-    color: white;
-    border: none;
-    border-radius: 0 5px 5px 0;
-}
+        .contact-info-item h6 {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 4px;
+        }
 
-.btn:focus{
-    outline:none;
-}
-.srch:focus{
-    outline:none;
-}
-.about2{
-            height: 100vh;
-            background:white;
-            padding: 30px;
-            padding-left:240px;
-            
-}
-.imge{
-    width:35vw;
+        .contact-info-item p {
+            color: #64748b;
+            font-size: 15px;
+            margin: 0;
+        }
 
-}
-footer{
-    background-color:black;
-    color:white;
-    width:100%;
-    height:30vh;
-    padding-top:30px;
-}
+        /* ── MODAL ── */
+        .modal-content {
+            border-radius: 20px;
+            overflow: hidden;
+            border: none;
+        }
 
-    
+        .modal-header {
+            background: var(--deep);
+            color: white;
+            border: none;
+        }
 
+        .modal-header .btn-close {
+            filter: invert(1);
+        }
+
+        .modal-body .form-control,
+        .modal-body .form-select {
+            border-radius: 10px;
+            padding: 12px 16px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .modal-body .form-control:focus,
+        .modal-body .form-select:focus {
+            border-color: var(--sky);
+            box-shadow: 0 0 0 3px rgba(56,189,248,0.15);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--dark);
+            color: #94a3b8;
+            padding: 60px 40px 30px 260px;
+        }
+
+        footer .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: white;
+            margin-bottom: 12px;
+        }
+
+        footer .footer-desc {
+            font-size: 14px;
+            max-width: 260px;
+            line-height: 1.7;
+        }
+
+        footer h6 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        footer a {
+            display: block;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 10px;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: var(--sky);
+        }
+
+        footer .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.08);
+            color: white;
+            text-decoration: none;
+            margin-right: 8px;
+            font-size: 17px;
+            transition: background 0.2s;
+        }
+
+        footer .social-links a:hover {
+            background: var(--sky);
+        }
+
+        footer .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.07);
+            padding-top: 24px;
+            margin-top: 40px;
+            font-size: 13px;
+        }
+
+        /* logo colors */
+        .one { color: var(--sky); font-family: 'Playfair Display', serif; }
+        .two { color: var(--deep); font-family: 'Playfair Display', serif; }
+
+        /* toast */
+        #toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--deep);
+            color: white;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        #toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* sign-in modal trigger */
+        .btn-signin {
+            background: var(--deep);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-signin:hover { background: var(--sky); }
+
+        /* Back to top button */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            left: 260px;
+            background: var(--sky);
+            color: white;
+            border: none;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            font-size: 20px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            transition: background 0.2s;
+        }
+        #backToTop:hover { background: var(--deep); }
+        #backToTop.visible { display: flex; }
     </style>
 </head>
 <body>
 
-<!-- Navbar -->
+<!-- Toast notification -->
+<div id="toast"></div>
+
+<!-- Back to top -->
+<button id="backToTop" title="Back to top"><i class="bi bi-arrow-up"></i></button>
+
+<!-- ── NAVBAR ── -->
 <div class="navbar">
     <div class="logo">
-        <p><span class="one">Sky</span><span  class="two">Route</span> Travels</p>
+        <span class="one">Sky</span><span class="two">Route</span> Travels
     </div>
 
     <ul class="nav-links">
-        <li><a href="#" class="navhover"><i class="bi bi-house-door-fill"></i> Home</a></li>
-        <li><a href="#" class="navhover"><i class="bi bi-crosshair2"></i> Packages</a></li>
-        <li><a href="#" class="navhover"><i class="bi bi-info-circle-fill"></i> About</a></li>
-        <li><a href="#" class="navhover"><i class="bi bi-telephone-inbound-fill"></i> Contact</a></li>
+        <li><a href="#hero"><i class="bi bi-house-door-fill"></i> Home</a></li>
+        <li><a href="#deals"><i class="bi bi-crosshair2"></i> Packages</a></li>
+        <li><a href="#about"><i class="bi bi-info-circle-fill"></i> About</a></li>
+        <li><a href="#contact"><i class="bi bi-telephone-inbound-fill"></i> Contact</a></li>
     </ul>
 
-    <button class="btn btn-primary">Sign In</button>
+    <button class="btn-signin" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</button>
 </div>
 
-<!-- Sidebar -->
+<!-- ── SIDEBAR ── -->
 <div class="sidebar">
     <a href="#"><i class="bi bi-person-circle"></i> Profile</a>
-    <a href="#"><i class="bi bi-calendar-check"></i> Bookings</a>
-    <a href="#"><i class="bi bi-bookmark-heart"></i> Saved Trips</a>
+    <a href="#deals"><i class="bi bi-calendar-check"></i> Bookings</a>
+    <a href="#deals"><i class="bi bi-bookmark-heart"></i> Saved Trips</a>
     <a href="#"><i class="bi bi-bell"></i> Notifications</a>
     <a href="#"><i class="bi bi-gear-wide-connected"></i> Settings</a>
     <a href="#"><i class="bi bi-box-arrow-right"></i> Logout</a>
 </div>
 
-<!-- Main Content -->
-<div class="content">
+<!-- ── MAIN CONTENT ── -->
+<div class="content" id="hero">
 
     <!-- Auto Sliding Carousel -->
     <div id="heroCarousel"
-         class="carousel slide"
+         class="carousel slide position-relative"
          data-bs-ride="carousel"
-         data-bs-interval="3000"
+         data-bs-interval="3500"
          data-bs-pause="false">
 
-        <!-- Indicators -->
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
             <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
@@ -292,334 +748,759 @@ footer{
         </div>
 
         <div class="carousel-inner">
-
             <div class="carousel-item active">
-                <img src="travel1.png" class="d-block w-100" alt="">
-                <div class="carousel-caption">
+                <img src="travel1.png" class="d-block w-100" alt="Travel">
+                <div class="carousel-caption d-none d-md-block">
                     <h1>Your Trip Starts Here</h1>
-                    <p>Explore the world with SkyRoute</p>
+                    <p>Explore the world with SkyRoute Travels</p>
                 </div>
             </div>
-
             <div class="carousel-item">
-                <img src="https://img.freepik.com/free-photo/man-with-backpack-strolling-by-beach-fluffy-clouds_1258-296115.jpg?semt=ais_hybrid&w=740&q=80" class="d-block w-100" alt="">
-                <div class="carousel-caption">
+                <img src="https://img.freepik.com/free-photo/man-with-backpack-strolling-by-beach-fluffy-clouds_1258-296115.jpg?semt=ais_hybrid&w=740&q=80" class="d-block w-100" alt="Beach">
+                <div class="carousel-caption d-none d-md-block">
                     <h1>Adventure Awaits</h1>
-                    <p>Explore More</p>
+                    <p>Sun, sea, and memories that last a lifetime</p>
                 </div>
             </div>
-
             <div class="carousel-item">
-                <img src="https://www.celebritycruises.com/blog/content/uploads/2022/01/most-beautiful-mountains-in-the-world-kirkjufell-iceland-1024x580.jpg" class="d-block w-100" alt="">
-                <div class="carousel-caption">
+                <img src="https://www.celebritycruises.com/blog/content/uploads/2022/01/most-beautiful-mountains-in-the-world-kirkjufell-iceland-1024x580.jpg" class="d-block w-100" alt="Mountains">
+                <div class="carousel-caption d-none d-md-block">
                     <h1>Best Travel Packages</h1>
-                    <p>Luxury and comfort in every travel package</p>
+                    <p>Luxury and comfort in every journey</p>
                 </div>
             </div>
-
         </div>
 
-        <!-- Controls -->
         <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
         </button>
-
         <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon"></span>
         </button>
 
+        <!-- Hero Search -->
+        <div class="hero-search">
+            <div class="search-wrap">
+                <input type="text" id="heroSearch" placeholder="🔍  Search destinations — Paris, Bali, Tokyo…">
+                <button onclick="doSearch()">Search</button>
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- About Section -->
-<div class="about">
-    <div class="container py-5">
+<!-- ── DEALS SECTION ── -->
+<div class="deals-section" id="deals">
+    <div class="container-fluid">
 
-    <!-- Title + Filters -->
-    <div class="row align-items-center mb-4">
-        <div class="col-lg-6">
-            <h1 class="deals-title">Best holiday deals</h1>
-        </div>
-        <div class="col-lg-6 text-center">
-            <div class="search">
-                <input class="srch" type="search" placeholder="Search destinations">
-                <button class="search-btn ">Search</button>
+        <!-- Title + Filters -->
+        <div class="row align-items-center mb-4">
+            <div class="col-lg-6">
+                <h1 class="deals-title">Best Holiday Deals</h1>
+                <p class="deals-subtitle">Hand-picked packages at unbeatable prices</p>
             </div>
         </div>
 
-
-        <div class="col-lg-12  mt-3 mt-lg-3">
-            <button class="btn btn-success filter-btn me-2">All</button>
-            <button class="btn btn-outline-secondary filter-btn me-2">London</button>
-            <button class="btn btn-outline-secondary filter-btn me-2">Birmingham</button>
-            <button class="btn btn-outline-secondary filter-btn me-2">Manchester</button>
-            <button class="btn btn-outline-secondary filter-btn">Derby</button>
+        <!-- Filter Buttons -->
+        <div class="mb-4 d-flex flex-wrap gap-2" id="filterBtns">
+            <button class="btn btn-success filter-btn active" data-filter="all">All</button>
+            <button class="btn btn-outline-secondary filter-btn" data-filter="europe">Europe</button>
+            <button class="btn btn-outline-secondary filter-btn" data-filter="asia">Asia</button>
+            <button class="btn btn-outline-secondary filter-btn" data-filter="middleeast">Middle East</button>
+            <button class="btn btn-outline-secondary filter-btn" data-filter="oceania">Oceania</button>
         </div>
-    </div>
 
-    <!-- Cards -->
-    <div class="row g-4">
+        <!-- Cards -->
+        <div class="row g-4" id="cardGrid">
 
-        <!-- Card 1 -->
-        <div class="col-md-4">
-            <div class="card position-relative shadow-sm">
-                <span class="discount">30% off</span>
-                <img src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad" alt="">
-                <div class="heart">♡</div>
-                <div class="card-body">
-                    <div class="text-center">
-                        <h5 class="fw-bold">Derby</h5>
-                        <p class="text-muted mb-1">⭐⭐⭐⭐☆</p>
+            <!-- Card 1 - Derby -->
+            <div class="col-md-4 card-item" data-cat="europe">
+                <div class="card position-relative shadow-sm">
+                    <span class="discount">30% off</span>
+                    <img src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?w=600&q=80" alt="Derby">
+                    <div class="heart" onclick="toggleHeart(this)">♡</div>
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <h5 class="fw-bold">Derby, UK</h5>
+                            <p class="text-muted mb-1">⭐⭐⭐⭐☆</p>
+                        </div>
+                        <div class="price-tag">
+                            <div class="from">from</div>
+                            <div class="amount">$899</div>
+                        </div>
+                        <p class="text-muted small"><i class="bi bi-brightness-alt-high-fill"></i> 19 days &amp; 18 nights</p>
+                        <p class="text-muted small"><i class="bi bi-hand-thumbs-up"></i> Return International Flights</p>
+                        <p class="text-muted small"><i class="bi bi-calendar-check"></i> 6 Mar – Nov 2026</p>
+                        <p class="text-muted small"><i class="bi bi-clock"></i> Book by Oct 30, 2026</p>
+                        <div class="text-center mt-3">
+                            <button class="btn btn-info text-white px-4" onclick="openBooking('Derby, UK', '$899')">Book Your Trip</button>
+                        </div>
                     </div>
-                    
-                    <p class="text-muted"><i class="bi bi-brightness-alt-high-fill"></i> 19 days and 18 nights</p>
-                    <p class="text-muted"><i class="bi bi-hand-thumbs-up"></i> Returns International Flights</p>
-                    <p class="text-muted"><i class="bi bi-calendar-check"></i> 6 Mar - Nov 2026</p>
-                    <p class="text-muted"><i class="bi bi-clock"></i> Book by Oct 30 2026</p>
-                    <div class="text-center mt-4">
-                        <button class="btn btn-info text-white">Book Your Trip</button>
-                    </div>
-                    
                 </div>
             </div>
-        </div>
 
-        <!-- Card 2 -->
-        <div class="col-md-4">
-            <div class="card position-relative shadow-sm">
-                <span class="discount">20% off</span>
-                <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e" alt="">
-                <div class="heart">♡</div>
-                <div class="card-body ">
-                    <div class="text-center">
-                        <h5 class="fw-bold">Manchester</h5>
-                        <p class="text-muted mb-1">⭐⭐⭐⭐⭐</p>
+            <!-- Card 2 - Manchester -->
+            <div class="col-md-4 card-item" data-cat="europe">
+                <div class="card position-relative shadow-sm">
+                    <span class="discount">20% off</span>
+                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&q=80" alt="Manchester">
+                    <div class="heart" onclick="toggleHeart(this)">♡</div>
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <h5 class="fw-bold">Manchester, UK</h5>
+                            <p class="text-muted mb-1">⭐⭐⭐⭐⭐</p>
+                        </div>
+                        <div class="price-tag">
+                            <div class="from">from</div>
+                            <div class="amount">$749</div>
+                        </div>
+                        <p class="text-muted small"><i class="bi bi-brightness-alt-high-fill"></i> 19 days &amp; 18 nights</p>
+                        <p class="text-muted small"><i class="bi bi-hand-thumbs-up"></i> Return International Flights</p>
+                        <p class="text-muted small"><i class="bi bi-calendar-check"></i> 6 Mar – Nov 2026</p>
+                        <p class="text-muted small"><i class="bi bi-clock"></i> Book by Oct 30, 2026</p>
+                        <div class="text-center mt-3">
+                            <button class="btn btn-info text-white px-4" onclick="openBooking('Manchester, UK', '$749')">Book Your Trip</button>
+                        </div>
                     </div>
-                    <p class="text-muted"><i class="bi bi-brightness-alt-high-fill"></i> 19 days and 18 nights</p>
-                    <p class="text-muted"><i class="bi bi-hand-thumbs-up"></i> Returns International Flights</p>
-                    <p class="text-muted"><i class="bi bi-calendar-check"></i> 6 Mar - Nov 2026</p>
-                    <p class="text-muted"><i class="bi bi-clock"></i> Book by Oct 30 2026</p>
-                    <div class="text-center mt-4">
-                        <button class="btn btn-info text-white">Book Your Trip</button>
-                    </div>
-                    
                 </div>
             </div>
-        </div>
 
-         <!-- Card 3 -->
-        <div class="col-md-4">
-            <div class="card position-relative shadow-sm">
-                <span class="discount">40% off</span>
-                <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee" alt="">
-                <div class="heart">♡</div>
-                <div class="card-body">
-                    <div class="text-center">
-                        <h5 class="fw-bold">Spain</h5>
-                        <p class="text-muted mb-1">⭐⭐⭐⭐☆</p>
+            <!-- Card 3 - Spain -->
+            <div class="col-md-4 card-item" data-cat="europe">
+                <div class="card position-relative shadow-sm">
+                    <span class="discount">40% off</span>
+                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600&q=80" alt="Spain">
+                    <div class="heart" onclick="toggleHeart(this)">♡</div>
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <h5 class="fw-bold">Spain</h5>
+                            <p class="text-muted mb-1">⭐⭐⭐⭐☆</p>
+                        </div>
+                        <div class="price-tag">
+                            <div class="from">from</div>
+                            <div class="amount">$1,199</div>
+                        </div>
+                        <p class="text-muted small"><i class="bi bi-brightness-alt-high-fill"></i> 19 days &amp; 18 nights</p>
+                        <p class="text-muted small"><i class="bi bi-hand-thumbs-up"></i> Return International Flights</p>
+                        <p class="text-muted small"><i class="bi bi-calendar-check"></i> 6 Mar – Nov 2026</p>
+                        <p class="text-muted small"><i class="bi bi-clock"></i> Book by Oct 30, 2026</p>
+                        <div class="text-center mt-3">
+                            <button class="btn btn-info text-white px-4" onclick="openBooking('Spain', '$1,199')">Book Your Trip</button>
+                        </div>
                     </div>
-                    <p class="text-muted"><i class="bi bi-brightness-alt-high-fill"></i> 19 days and 18 nights</p>
-                    <p class="text-muted"><i class="bi bi-hand-thumbs-up"></i> Returns International Flights</p>
-                    <p class="text-muted"><i class="bi bi-calendar-check"></i> 6 Mar - Nov 2026</p>
-                    <p class="text-muted"><i class="bi bi-clock"></i> Book by Oct 30 2026</p>
-                    <div class="text-center mt-4">
-                        <button class="btn btn-info text-white">Book Your Trip</button>
-                    </div>
-                    
                 </div>
             </div>
-        </div>
 
-        <div class="col-md-4">
-            <div class="card position-relative shadow-sm">
-                <span class="discount">40% off</span>
-                <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470">
-
-                <div class="heart">♡</div>
-                <div class="card-body">
-                    <div class="text-center">
-                        <h5 class="fw-bold">Switzerland</h5>
-                        <p class="text-muted mb-1">⭐⭐⭐⭐☆</p>
+            <!-- Card 4 - Switzerland -->
+            <div class="col-md-4 card-item" data-cat="europe">
+                <div class="card position-relative shadow-sm">
+                    <span class="discount">40% off</span>
+                    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=600&q=80" alt="Switzerland">
+                    <div class="heart" onclick="toggleHeart(this)">♡</div>
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <h5 class="fw-bold">Switzerland</h5>
+                            <p class="text-muted mb-1">⭐⭐⭐⭐☆</p>
+                        </div>
+                        <div class="price-tag">
+                            <div class="from">from</div>
+                            <div class="amount">$1,499</div>
+                        </div>
+                        <p class="text-muted small"><i class="bi bi-brightness-alt-high-fill"></i> 19 days &amp; 18 nights</p>
+                        <p class="text-muted small"><i class="bi bi-hand-thumbs-up"></i> Return International Flights</p>
+                        <p class="text-muted small"><i class="bi bi-calendar-check"></i> 6 Mar – Nov 2026</p>
+                        <p class="text-muted small"><i class="bi bi-clock"></i> Book by Oct 30, 2026</p>
+                        <div class="text-center mt-3">
+                            <button class="btn btn-info text-white px-4" onclick="openBooking('Switzerland', '$1,499')">Book Your Trip</button>
+                        </div>
                     </div>
-                    <p class="text-muted"><i class="bi bi-brightness-alt-high-fill"></i> 19 days and 18 nights</p>
-                    <p class="text-muted"><i class="bi bi-hand-thumbs-up"></i> Returns International Flights</p>
-                    <p class="text-muted"><i class="bi bi-calendar-check"></i> 6 Mar - Nov 2026</p>
-                    <p class="text-muted"><i class="bi bi-clock"></i> Book by Oct 30 2026</p>
-                    <div class="text-center mt-4">
-                        <button class="btn btn-info text-white">Book Your Trip</button>
-                    </div>
-                    
                 </div>
             </div>
-        </div>
 
-
-        <div class="col-md-4">
-            <div class="card position-relative shadow-sm">
-                <span class="discount">40% off</span>
-                <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c">
-
-
-                <div class="heart">♡</div>
-                <div class="card-body">
-                    <div class="text-center">
-                        <h5 class="fw-bold">Dubai</h5>
-                        <p class="text-muted mb-1">⭐⭐⭐⭐☆</p>
+            <!-- Card 5 - Dubai -->
+            <div class="col-md-4 card-item" data-cat="middleeast">
+                <div class="card position-relative shadow-sm">
+                    <span class="discount">40% off</span>
+                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80" alt="Dubai">
+                    <div class="heart" onclick="toggleHeart(this)">♡</div>
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <h5 class="fw-bold">Dubai, UAE</h5>
+                            <p class="text-muted mb-1">⭐⭐⭐⭐☆</p>
+                        </div>
+                        <div class="price-tag">
+                            <div class="from">from</div>
+                            <div class="amount">$999</div>
+                        </div>
+                        <p class="text-muted small"><i class="bi bi-brightness-alt-high-fill"></i> 19 days &amp; 18 nights</p>
+                        <p class="text-muted small"><i class="bi bi-hand-thumbs-up"></i> Return International Flights</p>
+                        <p class="text-muted small"><i class="bi bi-calendar-check"></i> 6 Mar – Nov 2026</p>
+                        <p class="text-muted small"><i class="bi bi-clock"></i> Book by Oct 30, 2026</p>
+                        <div class="text-center mt-3">
+                            <button class="btn btn-info text-white px-4" onclick="openBooking('Dubai, UAE', '$999')">Book Your Trip</button>
+                        </div>
                     </div>
-                    <p class="text-muted"><i class="bi bi-brightness-alt-high-fill"></i> 19 days and 18 nights</p>
-                    <p class="text-muted"><i class="bi bi-hand-thumbs-up"></i> Returns International Flights</p>
-                    <p class="text-muted"><i class="bi bi-calendar-check"></i> 6 Mar - Nov 2026</p>
-                    <p class="text-muted"><i class="bi bi-clock"></i> Book by Oct 30 2026</p>
-                    <div class="text-center mt-4">
-                        <button class="btn btn-info text-white">Book Your Trip</button>
-                    </div>
-                    
                 </div>
             </div>
-        </div>
 
-
-
-        <div class="col-md-4">
-            <div class="card position-relative shadow-sm">
-                <span class="discount">40% off</span>
-                <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26">
-
-                <div class="heart">♡</div>
-                <div class="card-body">
-                    <div class="text-center">
-                        <h5 class="fw-bold">Tokyo</h5>
-                        <p class="text-muted mb-1">⭐⭐⭐⭐☆</p>
+            <!-- Card 6 - Tokyo -->
+            <div class="col-md-4 card-item" data-cat="asia">
+                <div class="card position-relative shadow-sm">
+                    <span class="discount">40% off</span>
+                    <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=600&q=80" alt="Tokyo">
+                    <div class="heart" onclick="toggleHeart(this)">♡</div>
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <h5 class="fw-bold">Tokyo, Japan</h5>
+                            <p class="text-muted mb-1">⭐⭐⭐⭐☆</p>
+                        </div>
+                        <div class="price-tag">
+                            <div class="from">from</div>
+                            <div class="amount">$1,299</div>
+                        </div>
+                        <p class="text-muted small"><i class="bi bi-brightness-alt-high-fill"></i> 19 days &amp; 18 nights</p>
+                        <p class="text-muted small"><i class="bi bi-hand-thumbs-up"></i> Return International Flights</p>
+                        <p class="text-muted small"><i class="bi bi-calendar-check"></i> 6 Mar – Nov 2026</p>
+                        <p class="text-muted small"><i class="bi bi-clock"></i> Book by Oct 30, 2026</p>
+                        <div class="text-center mt-3">
+                            <button class="btn btn-info text-white px-4" onclick="openBooking('Tokyo, Japan', '$1,299')">Book Your Trip</button>
+                        </div>
                     </div>
-                    <p class="text-muted"><i class="bi bi-brightness-alt-high-fill"></i> 19 days and 18 nights</p>
-                    <p class="text-muted"><i class="bi bi-hand-thumbs-up"></i> Returns International Flights</p>
-                    <p class="text-muted"><i class="bi bi-calendar-check"></i> 6 Mar - Nov 2026</p>
-                    <p class="text-muted"><i class="bi bi-clock"></i> Book by Oct 30 2026</p>
-                    <div class="text-center mt-4">
-                        <button class="btn btn-info text-white">Book Your Trip</button>
-                    </div>
-                    
                 </div>
             </div>
-        </div>
 
-
-        <div class="col-md-4">
-            <div class="card position-relative shadow-sm">
-                <span class="discount">40% off</span>
-                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
-
-
-                <div class="heart">♡</div>
-                <div class="card-body">
-                    <div class="text-center">
-                        <h5 class="fw-bold">Indonesia</h5>
-                        <p class="text-muted mb-1">⭐⭐⭐⭐☆</p>
+            <!-- Card 7 - Indonesia -->
+            <div class="col-md-4 card-item" data-cat="asia">
+                <div class="card position-relative shadow-sm">
+                    <span class="discount">40% off</span>
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80" alt="Indonesia">
+                    <div class="heart" onclick="toggleHeart(this)">♡</div>
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <h5 class="fw-bold">Bali, Indonesia</h5>
+                            <p class="text-muted mb-1">⭐⭐⭐⭐☆</p>
+                        </div>
+                        <div class="price-tag">
+                            <div class="from">from</div>
+                            <div class="amount">$849</div>
+                        </div>
+                        <p class="text-muted small"><i class="bi bi-brightness-alt-high-fill"></i> 19 days &amp; 18 nights</p>
+                        <p class="text-muted small"><i class="bi bi-hand-thumbs-up"></i> Return International Flights</p>
+                        <p class="text-muted small"><i class="bi bi-calendar-check"></i> 6 Mar – Nov 2026</p>
+                        <p class="text-muted small"><i class="bi bi-clock"></i> Book by Oct 30, 2026</p>
+                        <div class="text-center mt-3">
+                            <button class="btn btn-info text-white px-4" onclick="openBooking('Bali, Indonesia', '$849')">Book Your Trip</button>
+                        </div>
                     </div>
-                    <p class="text-muted"><i class="bi bi-brightness-alt-high-fill"></i> 19 days and 18 nights</p>
-                    <p class="text-muted"><i class="bi bi-hand-thumbs-up"></i> Returns International Flights</p>
-                    <p class="text-muted"><i class="bi bi-calendar-check"></i> 6 Mar - Nov 2026</p>
-                    <p class="text-muted"><i class="bi bi-clock"></i> Book by Oct 30 2026</p>
-                    <div class="text-center mt-4">
-                        <button class="btn btn-info text-white">Book Your Trip</button>
-                    </div>
-                    
                 </div>
             </div>
-        </div>
 
-
-
-        <div class="col-md-4">
-            <div class="card position-relative shadow-sm">
-                <span class="discount">40% off</span>
-                <img src="https://images.unsplash.com/photo-1502786129293-79981df4e689">
-
-
-                <div class="heart">♡</div>
-                <div class="card-body">
-                    <div class="text-center">
-                        <h5 class="fw-bold">Newzealand</h5>
-                        <p class="text-muted mb-1">⭐⭐⭐⭐☆</p>
+            <!-- Card 8 - New Zealand -->
+            <div class="col-md-4 card-item" data-cat="oceania">
+                <div class="card position-relative shadow-sm">
+                    <span class="discount">40% off</span>
+                    <img src="https://images.unsplash.com/photo-1502786129293-79981df4e689?w=600&q=80" alt="New Zealand">
+                    <div class="heart" onclick="toggleHeart(this)">♡</div>
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <h5 class="fw-bold">New Zealand</h5>
+                            <p class="text-muted mb-1">⭐⭐⭐⭐☆</p>
+                        </div>
+                        <div class="price-tag">
+                            <div class="from">from</div>
+                            <div class="amount">$1,799</div>
+                        </div>
+                        <p class="text-muted small"><i class="bi bi-brightness-alt-high-fill"></i> 19 days &amp; 18 nights</p>
+                        <p class="text-muted small"><i class="bi bi-hand-thumbs-up"></i> Return International Flights</p>
+                        <p class="text-muted small"><i class="bi bi-calendar-check"></i> 6 Mar – Nov 2026</p>
+                        <p class="text-muted small"><i class="bi bi-clock"></i> Book by Oct 30, 2026</p>
+                        <div class="text-center mt-3">
+                            <button class="btn btn-info text-white px-4" onclick="openBooking('New Zealand', '$1,799')">Book Your Trip</button>
+                        </div>
                     </div>
-                    <p class="text-muted"><i class="bi bi-brightness-alt-high-fill"></i> 19 days and 18 nights</p>
-                    <p class="text-muted"><i class="bi bi-hand-thumbs-up"></i> Returns International Flights</p>
-                    <p class="text-muted"><i class="bi bi-calendar-check"></i> 6 Mar - Nov 2026</p>
-                    <p class="text-muted"><i class="bi bi-clock"></i> Book by Oct 30 2026</p>
-                    <div class="text-center mt-4">
-                        <button class="btn btn-info text-white">Book Your Trip</button>
-                    </div>
-                    
                 </div>
             </div>
-        </div>
 
-
-        <div class="col-md-4">
-            <div class="card position-relative shadow-sm">
-                <span class="discount">40% off</span>
-                <img src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d">
-
-
-                <div class="heart">♡</div>
-                <div class="card-body">
-                    <div class="text-center">
-                        <h5 class="fw-bold">China</h5>
-                        <p class="text-muted mb-1">⭐⭐⭐⭐☆</p>
+            <!-- Card 9 - China -->
+            <div class="col-md-4 card-item" data-cat="asia">
+                <div class="card position-relative shadow-sm">
+                    <span class="discount">40% off</span>
+                    <img src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=600&q=80" alt="China">
+                    <div class="heart" onclick="toggleHeart(this)">♡</div>
+                    <div class="card-body">
+                        <div class="text-center mb-3">
+                            <h5 class="fw-bold">China</h5>
+                            <p class="text-muted mb-1">⭐⭐⭐⭐☆</p>
+                        </div>
+                        <div class="price-tag">
+                            <div class="from">from</div>
+                            <div class="amount">$1,099</div>
+                        </div>
+                        <p class="text-muted small"><i class="bi bi-brightness-alt-high-fill"></i> 19 days &amp; 18 nights</p>
+                        <p class="text-muted small"><i class="bi bi-hand-thumbs-up"></i> Return International Flights</p>
+                        <p class="text-muted small"><i class="bi bi-calendar-check"></i> 6 Mar – Nov 2026</p>
+                        <p class="text-muted small"><i class="bi bi-clock"></i> Book by Oct 30, 2026</p>
+                        <div class="text-center mt-3">
+                            <button class="btn btn-info text-white px-4" onclick="openBooking('China', '$1,099')">Book Your Trip</button>
+                        </div>
                     </div>
-                    <p class="text-muted"><i class="bi bi-brightness-alt-high-fill"></i> 19 days and 18 nights</p>
-                    <p class="text-muted"><i class="bi bi-hand-thumbs-up"></i> Returns International Flights</p>
-                    <p class="text-muted"><i class="bi bi-calendar-check"></i> 6 Mar - Nov 2026</p>
-                    <p class="text-muted"><i class="bi bi-clock"></i> Book by Oct 30 2026</p>
-                    
-                    <div class="text-center mt-4">
-                        <button class="btn btn-info text-white">Book Your Trip</button>
-                    </div>
-                    
                 </div>
             </div>
-        </div>
 
-
-
-
-        
-
+        </div><!-- /row -->
     </div>
 </div>
 
-
+<!-- ── STATS SECTION ── -->
+<div class="stats-section">
+    <div class="container-fluid">
+        <div class="row g-4 text-center">
+            <div class="col-6 col-md-3 stat-box">
+                <div class="number">12K+</div>
+                <p>Happy Travellers</p>
+            </div>
+            <div class="col-6 col-md-3 stat-box">
+                <div class="number">85+</div>
+                <p>Destinations Covered</p>
+            </div>
+            <div class="col-6 col-md-3 stat-box">
+                <div class="number">200+</div>
+                <p>Tour Packages</p>
+            </div>
+            <div class="col-6 col-md-3 stat-box">
+                <div class="number">15+</div>
+                <p>Years of Experience</p>
+            </div>
+        </div>
+    </div>
 </div>
-<div class="about2">
-    <div class="container py-5">
-        <div class="row g-4">
-            <div class="col-lg-12">
-                <h1 class="text-center fw-bold"> About Us</h1>
 
+<!-- ── ABOUT US ── -->
+<div class="about2" id="about">
+    <div class="container-fluid">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-12 text-center mb-2">
+                <h1 class="fw-bold">About Us</h1>
+                <p class="text-muted">Who we are and what we stand for</p>
+            </div>
+            <div class="col-lg-6 col-md-12 text-center">
+                <img src="https://images.unsplash.com/photo-1488085061387-422e29b40080?w=700&q=80" class="imge" alt="About SkyRoute">
             </div>
             <div class="col-lg-6 col-md-12">
-                <img src="https://img.freepik.com/premium-vector/travelling-beach-logo-design-template-vector_1249511-485.jpg?semt=ais_hybrid&w=740&q=80" class="imge"/>
-                
-            </div>
-            <div class="col-lg-6 col-md-12 pt-5">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti iure deleniti nesciunt perferendis explicabo quisquam odit est accusantium magni, ab nobis maxime, tempore quos asperiores. Consequuntur consectetur ullam ab modi.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate impedit accusantium sit quis esse iusto qui totam distinctio velit inventore aut dolorem aspernatur corrupti autem debitis, quos eaque, sequi ullam.
+                <h3 class="fw-bold mb-3" style="font-family:'Playfair Display',serif; color:var(--deep)">Turning journeys into lifelong memories</h3>
+                <p class="text-muted mb-4" style="line-height:1.8; font-size:16px">
+                    At SkyRoute Travels, we believe that travel is more than just a trip — it's a transformative experience. Founded in 2010, we have helped over 12,000 travellers explore the globe with carefully crafted packages that balance adventure, comfort, and affordability.
                 </p>
+                <p class="text-muted mb-4" style="line-height:1.8; font-size:16px">
+                    From the serene Alps of Switzerland to the bustling streets of Tokyo, our expert team handpicks every hotel, flight, and excursion to ensure you get the very best. Your dream holiday is just a click away.
+                </p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-shield-check text-info fs-4"></i>
+                        <span class="fw-500">100% Secure Booking</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-headset text-info fs-4"></i>
+                        <span>24/7 Customer Support</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-award text-info fs-4"></i>
+                        <span>Award-Winning Service</span>
+                    </div>
+                </div>
             </div>
         </div>
-        
     </div>
-    
-    
-
 </div>
-<footer class="text-center ml-5">
-    <p>         Design By || Jebastin Starlin<br></p>
-    <p>Email Address:jebastinstarlin@gmail.com<br></p>
-    <p>Contact:+91- 9943124031</p>
+
+<!-- ── TESTIMONIALS ── -->
+<div class="testimonials">
+    <div class="container-fluid">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">What Our Travellers Say</h2>
+            <p class="text-muted">Real stories from real adventurers</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="testi-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Absolutely incredible experience! SkyRoute planned every detail perfectly. Our Switzerland trip was beyond expectations — would book again in a heartbeat."</p>
+                    <div class="author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah">
+                        <div>
+                            <div class="author-name">Sarah Mitchell</div>
+                            <div class="author-loc">London, UK</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testi-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"The Bali package was perfect for our honeymoon. Everything from flights to beach resorts was handled seamlessly. Pure magic!"</p>
+                    <div class="author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="James">
+                        <div>
+                            <div class="author-name">James & Priya Kapoor</div>
+                            <div class="author-loc">Manchester, UK</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="testi-card">
+                    <div class="stars">★★★★☆</div>
+                    <p>"Tokyo with SkyRoute was a dream. Great value, responsive support, and the itinerary was spot on. Highly recommend to any first-time Japan traveller!"</p>
+                    <div class="author">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma">
+                        <div>
+                            <div class="author-name">Emma Thompson</div>
+                            <div class="author-loc">Birmingham, UK</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── NEWSLETTER ── -->
+<div class="newsletter">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="fw-bold mb-2">Get Exclusive Travel Deals</h2>
+                <p style="color:#bae6fd; font-size:16px">Subscribe to our newsletter and never miss a hot offer.</p>
+                <div class="newsletter-form">
+                    <input type="email" id="nlEmail" placeholder="Your email address">
+                    <button onclick="subscribeNewsletter()">Subscribe</button>
+                </div>
+            </div>
+            <div class="col-lg-6 text-center mt-4 mt-lg-0">
+                <i class="bi bi-send-fill" style="font-size:120px; color:rgba(255,255,255,0.1);"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── CONTACT SECTION ── -->
+<div class="contact-section" id="contact">
+    <div class="container-fluid">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Get In Touch</h2>
+            <p class="text-muted">We'd love to help plan your next adventure</p>
+        </div>
+        <div class="row g-5">
+            <div class="col-lg-5">
+                <div class="contact-info-item">
+                    <div class="icon-box"><i class="bi bi-geo-alt-fill"></i></div>
+                    <div>
+                        <h6>Our Office</h6>
+                        <p>12 Travel Lane, Manchester, M1 2AB, United Kingdom</p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="icon-box"><i class="bi bi-telephone-fill"></i></div>
+                    <div>
+                        <h6>Phone</h6>
+                        <p>+91 9943124031</p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="icon-box"><i class="bi bi-envelope-fill"></i></div>
+                    <div>
+                        <h6>Email</h6>
+                        <p>jebastin.starlin@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="icon-box"><i class="bi bi-clock-fill"></i></div>
+                    <div>
+                        <h6>Working Hours</h6>
+                        <p>Mon – Sat: 9:00 AM – 6:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="contact-card">
+                    <h5 class="fw-bold mb-4">Send us a Message</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" placeholder="Your Name" id="cName">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="email" class="form-control" placeholder="Email Address" id="cEmail">
+                        </div>
+                        <div class="col-12">
+                            <select class="form-select" id="cDest">
+                                <option value="">Select a Destination</option>
+                                <option>Derby, UK</option>
+                                <option>Manchester, UK</option>
+                                <option>Spain</option>
+                                <option>Switzerland</option>
+                                <option>Dubai, UAE</option>
+                                <option>Tokyo, Japan</option>
+                                <option>Bali, Indonesia</option>
+                                <option>New Zealand</option>
+                                <option>China</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <textarea class="form-control" rows="4" placeholder="Your message…" id="cMsg"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn-submit" onclick="sendContact()">Send Message <i class="bi bi-send ms-2"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+    <div class="container-fluid">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="footer-brand"><span class="one">Sky</span><span class="two" style="color:#38bdf8">Route</span> Travels</div>
+                <p class="footer-desc">Making the world smaller, one unforgettable trip at a time. Your journey, our passion.</p>
+                <div class="social-links mt-4">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+                    <a href="#"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#"><i class="bi bi-youtube"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-6">
+                <h6>Quick Links</h6>
+                <a href="#hero">Home</a>
+                <a href="#deals">Packages</a>
+                <a href="#about">About Us</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="col-lg-2 col-6">
+                <h6>Destinations</h6>
+                <a href="#">Europe</a>
+                <a href="#">Asia</a>
+                <a href="#">Middle East</a>
+                <a href="#">Oceania</a>
+            </div>
+            <div class="col-lg-4">
+                <h6>Contact Info</h6>
+                <p style="font-size:14px"><i class="bi bi-telephone me-2 text-info"></i>+91 9943124031</p>
+                <p style="font-size:14px"><i class="bi bi-envelope me-2 text-info"></i>jebastin.starlin@gmail.com</p>
+                <p style="font-size:14px"><i class="bi bi-geo-alt me-2 text-info"></i>Manchester, United Kingdom</p>
+                <p class="mt-3" style="font-size:13px">Designed by <strong style="color:white">Jebastin Starlin</strong></p>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>© 2026 SkyRoute Travels. All rights reserved.</p>
+        </div>
+    </div>
 </footer>
-<!-- Bootstrap JS (REQUIRED) -->
+
+<!-- ── BOOKING MODAL ── -->
+<div class="modal fade" id="bookingModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold"><i class="bi bi-airplane-fill me-2"></i>Book Your Trip</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="mb-3 p-3 rounded" style="background:#f0f9ff">
+                    <strong id="modalDest"></strong> &nbsp;|&nbsp; <span id="modalPrice" style="color:var(--deep); font-weight:700"></span>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-500">Full Name</label>
+                        <input type="text" class="form-control" id="bName" placeholder="John Doe">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-500">Email</label>
+                        <input type="email" class="form-control" id="bEmail" placeholder="john@email.com">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-500">Travel Date</label>
+                        <input type="date" class="form-control" id="bDate">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-500">Travellers</label>
+                        <select class="form-select" id="bTravellers">
+                            <option>1 Person</option>
+                            <option>2 People</option>
+                            <option>3 People</option>
+                            <option>4+ People</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label fw-500">Special Requests</label>
+                        <textarea class="form-control" rows="3" placeholder="Any dietary requirements, accessibility needs, etc." id="bNotes"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-0">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button class="btn btn-info text-white px-4 fw-600" onclick="confirmBooking()">Confirm Booking</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── SIGN-IN MODAL ── -->
+<div class="modal fade" id="signInModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold"><i class="bi bi-person-circle me-2"></i>Sign In</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4">
+                <div class="mb-3">
+                    <label class="form-label fw-500">Email Address</label>
+                    <input type="email" class="form-control" placeholder="you@email.com" id="siEmail">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-500">Password</label>
+                    <input type="password" class="form-control" placeholder="••••••••" id="siPass">
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="remember">
+                        <label class="form-check-label" for="remember">Remember me</label>
+                    </div>
+                    <a href="#" style="color:var(--sky); font-size:14px">Forgot password?</a>
+                </div>
+                <button class="btn btn-primary w-100 py-2 fw-600" onclick="doSignIn()">Sign In</button>
+                <p class="text-center mt-3 text-muted" style="font-size:14px">Don't have an account? <a href="#" style="color:var(--sky)">Register</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+<script>
+    /* ── TOAST ── */
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 3200);
+    }
+
+    /* ── HEART TOGGLE ── */
+    function toggleHeart(el) {
+        el.classList.toggle('liked');
+        el.textContent = el.classList.contains('liked') ? '❤️' : '♡';
+        showToast(el.classList.contains('liked') ? '❤️ Added to Saved Trips!' : 'Removed from Saved Trips');
+    }
+
+    /* ── SEARCH ── */
+    function doSearch() {
+        const val = document.getElementById('heroSearch').value.trim().toLowerCase();
+        if (!val) return;
+        const cards = document.querySelectorAll('.card-item');
+        let found = 0;
+        cards.forEach(c => {
+            const title = c.querySelector('h5').textContent.toLowerCase();
+            if (title.includes(val)) {
+                c.style.display = '';
+                found++;
+            } else {
+                c.style.display = 'none';
+            }
+        });
+        document.getElementById('deals').scrollIntoView({ behavior: 'smooth' });
+        showToast(found ? `Found ${found} result(s) for "${val}"` : `No results for "${val}"`);
+        if (!found) setTimeout(() => {
+            document.querySelectorAll('.card-item').forEach(c => c.style.display = '');
+        }, 2500);
+    }
+
+    document.getElementById('heroSearch').addEventListener('keydown', e => {
+        if (e.key === 'Enter') doSearch();
+    });
+
+    /* ── FILTER BUTTONS ── */
+    document.getElementById('filterBtns').addEventListener('click', e => {
+        if (!e.target.classList.contains('filter-btn')) return;
+        document.querySelectorAll('.filter-btn').forEach(b => {
+            b.classList.remove('active', 'btn-success');
+            b.classList.add('btn-outline-secondary');
+        });
+        e.target.classList.add('active', 'btn-success');
+        e.target.classList.remove('btn-outline-secondary');
+        const filter = e.target.dataset.filter;
+        document.querySelectorAll('.card-item').forEach(c => {
+            c.style.display = (filter === 'all' || c.dataset.cat === filter) ? '' : 'none';
+        });
+    });
+
+    /* ── BOOKING MODAL ── */
+    function openBooking(dest, price) {
+        document.getElementById('modalDest').textContent = dest;
+        document.getElementById('modalPrice').textContent = price;
+        new bootstrap.Modal(document.getElementById('bookingModal')).show();
+    }
+
+    function confirmBooking() {
+        const name = document.getElementById('bName').value.trim();
+        const email = document.getElementById('bEmail').value.trim();
+        const date = document.getElementById('bDate').value;
+        if (!name || !email || !date) { showToast('⚠️ Please fill in all required fields'); return; }
+        bootstrap.Modal.getInstance(document.getElementById('bookingModal')).hide();
+        showToast('🎉 Booking confirmed! Check your email for details.');
+    }
+
+    /* ── SIGN-IN ── */
+    function doSignIn() {
+        const email = document.getElementById('siEmail').value.trim();
+        const pass = document.getElementById('siPass').value;
+        if (!email || !pass) { showToast('⚠️ Please enter your credentials'); return; }
+        bootstrap.Modal.getInstance(document.getElementById('signInModal')).hide();
+        showToast('✅ Signed in successfully! Welcome back.');
+    }
+
+    /* ── NEWSLETTER ── */
+    function subscribeNewsletter() {
+        const email = document.getElementById('nlEmail').value.trim();
+        if (!email || !email.includes('@')) { showToast('⚠️ Please enter a valid email'); return; }
+        document.getElementById('nlEmail').value = '';
+        showToast('📧 Subscribed! Great deals are on their way.');
+    }
+
+    /* ── CONTACT FORM ── */
+    function sendContact() {
+        const name = document.getElementById('cName').value.trim();
+        const email = document.getElementById('cEmail').value.trim();
+        const msg = document.getElementById('cMsg').value.trim();
+        if (!name || !email || !msg) { showToast('⚠️ Please fill in all fields'); return; }
+        document.getElementById('cName').value = '';
+        document.getElementById('cEmail').value = '';
+        document.getElementById('cDest').value = '';
+        document.getElementById('cMsg').value = '';
+        showToast('✅ Message sent! We\'ll get back to you soon.');
+    }
+
+    /* ── BACK TO TOP ── */
+    const btn = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        btn.classList.toggle('visible', window.scrollY > 400);
+    });
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    /* ── SMOOTH NAV LINKS ── */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const target = document.querySelector(a.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+</script>
 </body>
 </html>
